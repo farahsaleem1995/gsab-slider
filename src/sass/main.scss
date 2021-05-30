@@ -1,0 +1,56 @@
+* {
+  &::before,
+  &::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+}
+
+body {
+  background: #f4f4f4;
+}
+
+.container {
+  max-width: 900px;
+  margin: 4rem auto;
+}
+
+.slider {
+  width: 100%;
+}
+
+.slider .item {
+  width: 100%;
+  position: relative;
+}
+
+.slider .item .card {
+  position: absolute;
+  width: calc(100% - 2rem);
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.slider .item .card.card-1 {
+  top: 0;
+  right: 0;
+  height: 20rem;
+}
+
+.slider .item .card.card-2 {
+  top: 1rem;
+  right: 0;
+  transform: translateX(-1rem);
+  height: 18rem;
+  z-index: -1;
+}
+
+.slider .item .card.card-3 {
+  top: 2rem;
+  right: 0;
+  transform: translateX(-2rem);
+  height: 16rem;
+  z-index: -2;
+}
