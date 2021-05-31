@@ -93,14 +93,27 @@ class Slider {
     this.progress = false;
   }
 
-  prevAnimate = () => {
+  /**
+   *
+   * @param {Object} config
+   * @returns
+   */
+  prevAnimate = ({ onStartCallback, onCompleteCallback } = {}) => {
     return gsap
       .timeline({
         onStart: () => {
           this.progress = true;
+
+          if (onStartCallback) {
+            onStartCallback();
+          }
         },
         onComplete: () => {
           this.progress = false;
+
+          if (onCompleteCallback) {
+            onCompleteCallback();
+          }
         },
       })
       .to(this.tertiary.element, {
@@ -151,14 +164,27 @@ class Slider {
       });
   };
 
-  nextAnimate = () => {
+  /**
+   *
+   * @param {Object} config
+   * @returns
+   */
+  nextAnimate = ({ onStartCallback, onCompleteCallback } = {}) => {
     return gsap
       .timeline({
         onStart: () => {
           this.progress = true;
+
+          if (onStartCallback) {
+            onStartCallback();
+          }
         },
         onComplete: () => {
           this.progress = false;
+
+          if (onCompleteCallback) {
+            onCompleteCallback();
+          }
         },
       })
       .to(this.primary.element, {
@@ -223,7 +249,11 @@ const slider = new Slider(
 
 prevBtn.addEventListener("click", () => {
   if (!slider.progress) {
-    slider.prevAnimate();
+    slider.prevAnimate({
+      onStartCallback: () => {
+        console.log("prev");
+      },
+    });
   }
 });
 
@@ -232,13 +262,3 @@ nextBtn.addEventListener("click", () => {
     slider.nextAnimate();
   }
 });
-
-// setTimeout(() => {
-//   const slider = new Slider(
-//     new SliderCard(document.querySelector(".card-1")),
-//     new SliderCard(document.querySelector(".card-2")),
-//     new SliderCard(document.querySelector(".card-3"))
-//   );
-
-//   slider.nextAnimate();
-// }, 4000);
